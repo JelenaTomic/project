@@ -6,7 +6,7 @@ const sequelize = new Sequelize(
   process.env.DB_USER,
   process.env.DB_PASSWORD,
   {
-    host: '127.0.0.1',
+    host: 'cloud_instance_private_ip',
     dialect: 'mysql',
     port: 8889,
     connectionLimit: 10,
