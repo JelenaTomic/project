@@ -1,14 +1,12 @@
 const router = require('express').Router();
-const { Workout, Exercise } = require('../../models');
+const { Workout } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // This allows you to addd workouts
-router.post('/add', withAuth, async (req, res) => {
+router.post('/add', async (req, res) => {
   try {
     const newWorkout = await Workout.create({
-      title: req.body.title,
-      description: req.body.description,
-      user_id: req.session.user_id
+      workout_name: req.body.workout_name,
     });
     res.status(200).json(newWorkout);
 
@@ -18,17 +16,15 @@ router.post('/add', withAuth, async (req, res) => {
 });
 
 // This allows you to update workouts
-router.put('/update/:id', withAuth, async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   try {
     const workoutUpdate = await Workout.update(
       {
-        title: req.body.title,
-        description: req.body.description,
+        workout_name: req.body.workout_name,
       },
       {
         where: {
-          id: req.params.id,
-          user_id: req.session.user_id
+          workout_name: req.body.workout_name,
         },
       }
     );
@@ -52,7 +48,7 @@ router.delete('/delete/:id', withAuth, async (req, res) => {
     const workoutDelete = await Workout.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id
+       
       }
     });
 
