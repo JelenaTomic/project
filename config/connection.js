@@ -8,7 +8,8 @@ const sequelize = new Sequelize(
   {
     host: '127.0.0.1',
     dialect: 'mysql',
-    port: 3306,
+    port: 8889,
+    connectionLimit: 10,
     socketPath: '/var/run/mysqld/mysqld.sock'
 
   }
